@@ -1,14 +1,15 @@
 const postgre = require('../database')
-const bookController = {
+const userController = {
     getAll: async(req, res) => {
         try {
             const { rows } = await postgre.query("select * from users")
             res.json({msg: "OK", data: rows})
-            console.log(rows)
+            res.header("content-type", "application/json")
+            res.header("Access-Control-Allow-Origin", "*")
         } catch (error) {
             res.json({msg: error.msg})
         }
     },
 }
 
-module.exports = bookController
+module.exports = userController
